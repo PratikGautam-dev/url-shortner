@@ -6,11 +6,12 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f9;
+            background-color: #1a1a1a;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
+            color: #ffffff;
         }
         #div1 {
             margin: 5%;
@@ -20,7 +21,7 @@
             justify-content: center;
         }
         h1 {
-            color: #333;
+            color: #ffffff;
             margin: 0;
         }
         .button-container {
@@ -28,7 +29,7 @@
             gap: 10px;
         }
         .button {
-            background-color: #007bff;
+            background-color: #2563eb;
             color: #fff;
             padding: 10px 20px;
             border: none;
@@ -38,13 +39,13 @@
             font-size: 16px;
         }
         .button:hover {
-            background-color: #0056b3;
+            background-color: #1d4ed8;
         }
         form {
-            background-color: #fff;
+            background-color: #2d2d2d;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
             width: 300px;
             display: flex;
             flex-direction: column;
@@ -53,16 +54,22 @@
         label {
             margin-bottom: 8px;
             font-weight: bold;
+            color: #ffffff;
         }
         input[type="text"] {
             padding: 10px;
             margin-bottom: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #404040;
             border-radius: 4px;
             width: 100%;
+            background-color: #333333;
+            color: #ffffff;
+        }
+        input[type="text"]::placeholder {
+            color: #888888;
         }
         button {
-            background-color: #007bff;
+            background-color: #2563eb;
             color: #fff;
             padding: 10px;
             border: none;
@@ -70,24 +77,32 @@
             cursor: pointer;
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #1d4ed8;
         }
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
+            background-color: #2d2d2d;
         }
         th, td {
             padding: 10px;
-            border: 1px solid #ccc;
+            border: 1px solid #404040;
             text-align: left;
         }
         th {
-            background-color: #007bff;
+            background-color: #2563eb;
             color: #fff;
         }
         tr:nth-child(even) {
-            background-color: #f2f2f2;
+            background-color: #333333;
+        }
+        a {
+            color: #60a5fa;
+            text-decoration: none;
+        }
+        a:hover {
+            color: #93c5fd;
         }
     </style>
    
@@ -96,8 +111,8 @@
     <%- include('./partials/nav') %>
     
     <% if (locals.id) { %>
-        <p>URL generated: <a href="<%= process.env.VERCEL_URL || 'http://localhost:8001' %>/url/<%= id %>">
-            <%= process.env.VERCEL_URL || 'http://localhost:8001' %>/url/<%= id %>
+        <p>URL generated: <a href="/url/<%= id %>">
+            <%= process.env.SHORT_URL %>/url/<%= id %>
         </a></p>
     <% } %>
     
