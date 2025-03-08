@@ -9,13 +9,10 @@ const urlRoute = require('./routers/url');
 const staticRoute = require("./routers/staticRouter");
 const userRoute = require('./routers/user');
 
-const { connectToMongoose } = require('./connection');
+const { connectToMongoose, testConnection } = require('./connection');
 const app = express();
 
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/shorturl';
-connectToMongoose(MONGODB_URI).then(() => {
-    console.log("mongoose connected");
-});
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
@@ -48,4 +45,13 @@ app.get('/url/:shortId', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;  // Changed default fallback to 3000
-app.listen(PORT, () => console.log(`Server started at PORT: ${PORT}`));
+
+// Test database connection before starting server
+testConnection().then(isConnected => {
+    if (isConnected) {
+        app.listen(PORT, () => console.log(`Server started at PORT: ${PORT}`));
+    } else {
+        console.error('Failed to connect to MongoDB. Check your connection string and network settings.');
+        process.exit(1);
+    }
+});
