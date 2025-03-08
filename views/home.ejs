@@ -96,7 +96,9 @@
     <%- include('./partials/nav') %>
     
     <% if (locals.id) { %>
-        <p>URL generated: <a href="http://localhost:8001/url/<%= id %>">http://localhost:8001/url/<%= id %></a></p>
+        <p>URL generated: <a href="<%= process.env.VERCEL_URL || 'http://localhost:8001' %>/url/<%= id %>">
+            <%= process.env.VERCEL_URL || 'http://localhost:8001' %>/url/<%= id %>
+        </a></p>
     <% } %>
     
     <div id="div1">

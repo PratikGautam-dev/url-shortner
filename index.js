@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const cookieParser = require("cookie-parser");
@@ -11,7 +12,8 @@ const userRoute = require('./routers/user');
 const { connectToMongoose } = require('./connection');
 const app = express();
 
-connectToMongoose('mongodb://127.0.0.1:27017/shorturl').then(() => {
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/shorturl';
+connectToMongoose(MONGODB_URI).then(() => {
     console.log("mongoose connected");
 });
 
@@ -45,5 +47,5 @@ app.get('/url/:shortId', async (req, res) => {
     }
 });
 
-const PORT = 8001;
+const PORT = process.env.PORT || 3000;  // Changed default fallback to 3000
 app.listen(PORT, () => console.log(`Server started at PORT: ${PORT}`));
